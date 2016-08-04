@@ -45,7 +45,7 @@ The rules for strong and weak connectivity try to reflect whether the connection
 The restriction to linker edges is to prevent unexpected superfluous edges in the resulting graph. 
 The following image illustrates why ring edges have to be excluded.
 
-![level 3 exclusion rule](./images/level-3-exclusion-rule.svg)
+![level 3 exclusion rule](./images/level-3-exclusion-rule.png)
 
 The red ring bond is excluded when calculating a ring connectivity scaffold; including the edge would form a triangle instead of a linear path.
 
