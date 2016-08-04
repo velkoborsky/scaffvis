@@ -1,0 +1,313 @@
+@import "lib/bootstrap-sass/assets/stylesheets/bootstrap";
+//@import "lib/font-awesome/scss/font-awesome.scss";
+
+/*!
+ * main.scss
+ */
+
+//$base-color: rgb(221, 235, 189);
+$base-color: #bbb;
+$header-background-color: #222;
+$header-color: #9d9d9d;
+
+$accent-color: rgba(5, 89, 165, 0.8);
+
+$header-height: 50px;
+$footer-height: 50px;
+$toolbar-height: 50px;
+
+$content-color: white;
+$content-spacing: 20px;
+$content-top: ($header-height + $content-spacing);
+$content-bottom: ($footer-height + $content-spacing);
+$content-padding: 12px;
+$content-height: calc(100vh - #{$header-height + $footer-height + 2*$content-spacing});
+
+$breadcrumb-width: 12vh;
+
+$golden-ratio: 61.8%;
+
+* { box-sizing: border-box;	}
+
+body {
+	overflow: hidden;
+	margin: 0;
+	font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: $base-color;
+}
+.header {
+	overflow: hidden; position: absolute;
+	left: 0; right: 0; height: $header-height;
+	background-color: $header-background-color; color: $header-color;
+	box-shadow: 1px 1px 2px #999999;
+}
+//.header-brand {
+//	color: #9d9d9d;
+//	float: left;
+//	padding: 15px 15px;
+//	font-size: 18px;
+//	line-height: 20px;
+//	text-decoration: none;
+//}
+.footer {
+	overflow: hidden; position: absolute;
+	left: 0; right: 0; bottom: 0; height: $footer-height; line-height: 50px;
+	background-color: $header-background-color; color: $header-color;
+}
+.footer-text {
+	color: #9d9d9d;
+	float: left;
+	padding: 15px 15px;
+	line-height: 20px;
+	text-decoration: none;
+}
+
+@mixin content-box {
+	position: fixed;
+	top: $content-top; bottom: $content-bottom;
+	padding: $content-padding;
+	background-color: $content-color;
+	border-radius: 15px;
+	box-shadow: 1px 1px 2px #999999;
+}
+
+.leftbox {
+	@include content-box;
+
+	z-index: 20;
+	left: $content-spacing;
+	height: $content-height;
+}
+
+#MoleculesBox {
+	@include content-box;
+
+	z-index: 10;
+	right: $content-spacing;
+	padding-right: 1px;
+	overflow: hidden;
+
+
+}
+
+.list-box-toolbar {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: $toolbar-height;
+	padding-left: $content-padding;
+	padding-right: $content-padding;
+	border-top: 1px #ddd solid;
+	/*background: #4e575f;*/
+}
+
+.list-box-toolbar > .pagination {
+	margin: 8px 0;
+}
+
+.list-box-toolbar > .btn-group {
+	margin: 8px 0;
+	float: right;
+}
+
+.list-box-scrollbox {
+	position: absolute;
+
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100%;
+
+	overflow-x: hidden;
+	overflow-y: auto;
+
+	&::-webkit-scrollbar-thumb{
+		background-color: rgba(0,0,0,.2);
+		border-radius: $content-padding;
+	}
+	&::-webkit-scrollbar{
+		width:#{$content-padding - 1px}!important;
+	}
+
+}
+
+.list-box-toolbar ~ .list-box-scrollbox {
+	height: calc(100% - #{$toolbar-height});
+}
+
+.breadcrumb {
+	@include content-box;
+
+	z-index: 30;
+	left: $content-spacing;
+	height: $content-height;
+	width: $breadcrumb-width;
+	display: none;
+}
+
+.with-breadcrumb {
+	.breadcrumb { display: block }
+}
+
+.scaffolds-as-list {
+	.leftbox { width: calc(50vw - #{1.5*$content-spacing}); }
+	#MoleculesBox { width: calc(50vw - #{1.5*$content-spacing});}
+}
+
+@media screen and (min-aspect-ratio: 3/2) {
+	.leftbox { width: $content-height; }
+	#MoleculesBox { width: calc(100vw - 100vh + #{$header-height + $footer-height - $content-spacing}); }
+
+	.with-breadcrumb {
+		.leftbox { left: calc(12vh + #{2*$content-spacing}); } //.breadcrumb ~ .leftbox does not work - not the same level
+		#MoleculesBox { width: calc(100vw - 112vh + #{$header-height + $footer-height - 2*$content-spacing}); }
+	}
+
+	.with-breadcrumb.scaffolds-as-list {
+		.leftbox { width: calc(50vw - #{2*$content-spacing} - #{$breadcrumb-width/2}); }
+		#MoleculesBox { width: calc(50vw - #{2*$content-spacing} - #{$breadcrumb-width/2});}
+	}
+}
+@media screen and (max-aspect-ratio: 3/2) {
+	.leftbox { width: calc(60vw - #{1.5*$content-spacing}); }
+	#MoleculesBox { width: calc(40vw - #{1.5*$content-spacing});}
+
+	.with-breadcrumb {
+		.breadcrumb { display: none }
+	}
+}
+
+div.maintooltip { //Bootstrap already defines .tooltip
+	display: none;
+	position: fixed;
+	background-color: $accent-color;
+	box-shadow: 2px 2px 4px #999999;
+	color: #fff;
+	padding: 5px;
+	border-radius: 5px;
+	z-index: 100;
+}
+
+.list-box-item.list-group-item.disabled > div {
+	opacity: 0.3;
+	/* it also gets a bootstrap styling - gray bg */
+}
+
+.list-group-item-heading {
+	overflow-wrap: break-word;
+}
+
+.list-group-item-text {
+	overflow-wrap: break-word;
+}
+
+rect.treemap-molecule-fg {
+	stroke-width: 4;
+	fill: white;
+	fill-opacity: 0;
+	stroke: none;
+}
+
+rect.treemap-molecule-fg.active {
+	stroke: black
+}
+
+rect.treemap-molecule-fg:hover {
+	stroke: black
+}
+
+rect.treemap-molecule-fg.deselected {
+	fill-opacity: 0.7;
+}
+
+rect.treemap-molecule-bg {
+	stroke-width: 1;
+	stroke: white;
+	//fill: rgb(221, 235, 189);
+}
+
+rect.breadcrumb-molecule {
+	stroke-width: 4;
+}
+
+rect.breadcrumb-molecule-fg {
+	fill: white;
+	fill-opacity: 0;
+	stroke: none;
+}
+
+rect.breadcrumb-molecule-fg:hover {
+	stroke: black;
+}
+
+rect.breadcrumb-molecule-bg {
+	fill: lighten($base-color, 20);
+	stroke: white;
+}
+
+rect.breadcrumb-molecule-bg.current {
+	fill: $base-color;
+	stroke: white;
+}
+
+rect.moleculemap-molecule {
+	stroke-width: 4;
+}
+
+rect.moleculemap-molecule-fg {
+	fill: white;
+	fill-opacity: 0;
+	stroke: none;
+}
+
+rect.moleculemap-molecule-fg.active {
+	stroke: black
+}
+
+rect.moleculemap-molecule-fg:hover {
+	stroke: black
+}
+
+rect.moleculemap-molecule-fg.deselected {
+	fill-opacity: 0.7;
+}
+
+rect.moleculemap-molecule-bg {
+	fill: lighten($base-color, 20);
+	stroke: white;
+}
+
+//bootstrap glyphincon refresh animation http://www.bootply.com/128062
+.glyphicon-refresh {
+	-animation: spin .7s infinite linear;
+	-webkit-animation: spin2 .7s infinite linear;
+}
+
+@-webkit-keyframes spin2 {
+	from { -webkit-transform: rotate(0deg);}
+	to { -webkit-transform: rotate(360deg);}
+}
+
+@keyframes spin {
+	from { transform: scale(1) rotate(0deg);}
+	to { transform: scale(1) rotate(360deg);}
+}
+
+@mixin centered-box {
+	padding: 15px 30px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: $golden-ratio;
+	transform: translate(-50%,-50%);
+	text-align: center;
+	border: 1px solid transparent;
+	border-radius: 4px;
+}
+
+.centered-box-default {
+	@include centered-box;
+	background: lighten($base-color, 20);
+	border-color: darken($base-color, 20);
+}

@@ -1,0 +1,30 @@
+Please copy the following list of libraries from a JChem Suite cross platform ZIP package into this directory.
+
+The libraries should be contained in the jchem/lib/ subdirectory of the extracted ZIP file.
+
+The application has been verified to work with version 16.1.4.0, although it might be possible to use a later version.
+
+List of required files
+----------------------
+
+batik-core-1.0.jar
+com.chemaxon-common.jar
+com.chemaxon-concurrent.jar
+com.chemaxon-core-calculations.jar
+com.chemaxon-core.jar
+com.chemaxon-io-mdl.jar
+com.chemaxon-io-mrv.jar
+com.chemaxon-io-peptide.jar
+com.chemaxon-io-smiles.jar
+com.chemaxon-io.jar
+com.chemaxon-license.jar
+com.chemaxon-marvin-gui.jar
+com.chemaxon-search-sss.jar
+com.chemaxon-search-utils.jar
+com.chemaxon-version.jar
+commons-io-2.4.jar
+commons-lang-2.5.jar
+guava-16.0.1.jar
+jsr305-2.0.3.jar
+xml-apis-1.0.b2.jar
+

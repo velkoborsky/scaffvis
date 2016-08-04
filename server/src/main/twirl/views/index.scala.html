@@ -1,0 +1,17 @@
+@(title: String)(implicit environment: play.api.Environment)
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>@title</title>
+        <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+        <link rel="stylesheet" media="screen" href=@routes.Assets.versioned("stylesheets/main.css") >
+        <link rel="shortcut icon" type="image/png" href=@routes.Assets.versioned("images/favicon.png") >
+    </head>
+    <body>
+        <div id="react-container" />
+        @playscalajs.html.scripts(projectName = "client", fileName => routes.Assets.versioned(fileName).toString)
+    </body>
+</html>
