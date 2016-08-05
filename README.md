@@ -5,6 +5,7 @@ Scaffold Visualizer is an interactive tool for scaffold-based hierarchical visua
 # Documentation
 
 - [The Scaffold Hierarchy](./doc/the-scaffold-hierarchy.md)
+- [Server Installation](./doc/server-installation.md)
 
 # Demo Instance
 
