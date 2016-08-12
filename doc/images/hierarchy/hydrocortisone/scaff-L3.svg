@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs id="genericDefs" />
+  <g>
+    <defs id="226586078493-defs1">
+      <clipPath clipPathUnits="userSpaceOnUse" id="226586078253-clipPath1">
+        <path d="M0 0 L0 400 L400 400 L400 0 Z" />
+      </clipPath>
+      <clipPath clipPathUnits="userSpaceOnUse" id="226586078495-clipPath1">
+        <path d="M0 0 L400 0 L400 400 L0 400 L0 0 Z" />
+      </clipPath>
+    </defs>
+    <g text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">
+      <path d="M354.31915283203125 253.13092041015625 L354.31915283203125 264.3011474609375 L224.01470947265625 264.3011474609375 L230.4638214111328 253.13092041015625 L236.91294860839844 241.96070861816406 L354.31915283203125 241.96070861816406 Z" clip-path="url(#226586078253-clipPath1)" stroke="none" />
+    </g>
+    <g text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">
+      <path d="M230.4638214111328 253.13092041015625 L224.01470947265625 264.3011474609375 L162.08705139160156 157.03929138183594 L168.5361785888672 145.86907958984375 L174.98529052734375 134.69886779785156 L236.91294860839844 241.96070861816406 Z" clip-path="url(#226586078253-clipPath1)" stroke="none" />
+    </g>
+    <g text-rendering="optimizeLegibility" shape-rendering="geometricPrecision">
+      <path d="M168.5361785888672 145.86907958984375 L162.08705139160156 157.03929138183594 L44.68085861206055 157.03929138183594 L44.68085861206055 145.86907958984375 L44.68085861206055 134.69886779785156 L174.98529052734375 134.69886779785156 Z" clip-path="url(#226586078253-clipPath1)" stroke="none" />
+    </g>
+  </g>
+</svg>
