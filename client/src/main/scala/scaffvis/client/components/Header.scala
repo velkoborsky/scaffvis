@@ -57,6 +57,11 @@ object Header {
             <.button(^.`type` := "button", CSS.btnDefault, CSS.navbarBtn,
               GlyphIcon.saveFile, " Export",
               ^.onClick --> $.modState(_.copy(showExportForm = true))
+            ),
+            <.a(CSS.btnDefault, CSS.navbarBtn,
+              GlyphIcon.questionSign, " Help",
+              ^.href := "https://github.com/velkoborsky/scaffvis#documentation",
+              ^.target := "_blank"
             )
           ),
 
@@ -100,15 +105,15 @@ object Header {
               <.button(^.key := "show_only_subtree",
                 navbarBtnClassAndIconMod(selected = viewState.showOnlySubtree),
                 ^.onClick --> Store.dispatchCB(UpdateViewState(f => f.copy(showOnlySubtree = !viewState.showOnlySubtree))),
-                " Show only subtree"),
+                " Only subtree"),
               <.button(^.key := "show_only_selected",
                 navbarBtnClassAndIconMod(selected = viewState.showOnlySelected),
                 ^.onClick --> Store.dispatchCB(UpdateViewState(f => f.copy(showOnlySelected = !viewState.showOnlySelected))),
-                " Show only selected"),
+                " Only selected"),
               <.button(^.key := "show_only_search_results",
                 navbarBtnClassAndIconMod(selected = viewState.showOnlySearchResults),
                 ^.onClick --> Store.dispatchCB(UpdateViewState(f => f.copy(showOnlySearchResults = !viewState.showOnlySearchResults))),
-                " Show only search results")
+                " Only search results")
             )
           )
 

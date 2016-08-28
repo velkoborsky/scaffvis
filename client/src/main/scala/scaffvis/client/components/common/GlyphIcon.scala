@@ -15,6 +15,7 @@ object GlyphIcon {
   lazy val check = base("check")
   lazy val exclamationSign = base("exclamation-sign")
   lazy val openFile = base("open-file")
+  lazy val questionSign = base("question-sign")
   lazy val refresh = base("refresh")
   lazy val remove = base("remove")
   lazy val saveFile = base("save-file")
