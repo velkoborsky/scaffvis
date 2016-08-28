@@ -54,7 +54,7 @@ object LoadDatasetForm {
             ^.onChange ==> onChooseFile
           )
         ),
-        <.div("Please note that the dataset might take a long time to load and process. Expect up to one minute for" +
+        <.div("Please note that the dataset might take a long time to load and process. Expect up to one minute for " +
             "every ten thousand molecules in the dataset."
         )
       )
