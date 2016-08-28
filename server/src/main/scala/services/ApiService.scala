@@ -47,28 +47,28 @@ class ApiService @Inject()(
   /**
     * Load (and preprocess) dataset
     */
-  override def loadFromSmiles(smiles: Seq[String]): Seq[Molecule] = {
-    var counter = 0
-    def nextId(): Int = {
-      counter += 1; counter
-    }
-    for {
-      s <- smiles
-      m = SmilesOps.smilesToMolecule(s)
-      scaffolds = scaffoldHierarchy.scaffoldAncestors(scaffoldHierarchy.findLowestScaffold(m))
-    } yield Molecule(
-      id = nextId(),
-      smiles = s,
-      name = None,
-      comment = None,
-      scaffolds = scaffolds
-    )
-  }
+//  override def loadFromSmiles(smiles: Seq[String]): Seq[Molecule] = {
+//    var counter = 0
+//    def nextId(): Int = {
+//      counter += 1; counter
+//    }
+//    for {
+//      s <- smiles
+//      m = SmilesOps.smilesToMolecule(s)
+//      scaffolds = scaffoldHierarchy.scaffoldAncestors(scaffoldHierarchy.findLowestScaffold(m))
+//    } yield Molecule(
+//      id = nextId(),
+//      smiles = s,
+//      name = None,
+//      comment = None,
+//      scaffolds = scaffolds
+//    )
+//  }
 
-  override def loadFromFile(fileContent: Array[Byte]): Seq[Molecule] = {
-    val is = new ByteArrayInputStream(fileContent)
-    loadFromFile(is)
-  }
+//  override def loadFromFile(fileContent: Array[Byte]): Seq[Molecule] = {
+//    val is = new ByteArrayInputStream(fileContent)
+//    loadFromFile(is)
+//  }
 
   val batchSize = 1 << 17
 

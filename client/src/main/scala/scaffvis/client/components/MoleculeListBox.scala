@@ -1,12 +1,12 @@
 package scaffvis.client.components
 
+import diode.data.{Empty, Failed, Pending, Ready}
+import japgolly.scalajs.react._
 import scaffvis.client.components.common.{Formatter, SvgProvider}
 import scaffvis.client.store.Store
 import scaffvis.client.store.actions.MoleculesActions._
 import scaffvis.client.store.model.{Model, VSFilter}
 import scaffvis.shared.model.{Molecule, MoleculeId, Scaffold}
-import diode.data.{Empty, Pending, Ready}
-import japgolly.scalajs.react._
 
 object MoleculeListBox {
 
@@ -24,6 +24,7 @@ object MoleculeListBox {
 
       val items = model.molecules match {
         case Empty => Left("No dataset loaded")
+        case Failed(_) => Left("Loading dataset failed")
         case Pending(_) => Left("Loading dataset")
         case Ready(molecules) => {
 

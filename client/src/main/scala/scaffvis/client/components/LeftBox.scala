@@ -7,7 +7,7 @@ import scaffvis.client.store.actions.ScaffoldsActions.LoadChildren
 import scaffvis.client.store.model.{Model, ScaffoldHierarchy}
 import scaffvis.layout.Rect
 import scaffvis.shared.model._
-import diode.data.{Empty, Pending, Ready}
+import diode.data.{Empty, Failed, Pending, Ready}
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.extra.router.RouterCtl
 import japgolly.scalajs.react.vdom.prefix_<^._
@@ -92,6 +92,8 @@ object LeftBox {
               <.div(CSS.centeredBoxDefault, "Loading molecules")
             case Empty =>
               <.div(CSS.centeredBoxDefault, "No dataset loaded")
+            case Failed(_) =>
+              <.div(CSS.centeredBoxDefault, "Loading dataset failed")
             case _ =>
               <.div(CSS.centeredBoxDefault, "Unexpected state")
           }

@@ -18,9 +18,10 @@ object MoleculesActions {
   case class UpdateMoleculeSvg(molecules: Seq[MoleculeId], svg: Seq[String]) extends Action
 
   case class ReplaceMolecules(molecules: Seq[Molecule]) extends Action
+  case class LoadMoleculesFailed(exception: Throwable) extends Action
 
-  case class LoadMoleculesFromSmiles(smiles: Seq[String]) extends Action
-  case class LoadMoleculesFromFile(fileContent: Array[Byte]) extends Action
+//  case class LoadMoleculesFromSmiles(smiles: Seq[String]) extends Action
+//  case class LoadMoleculesFromFile(fileContent: Array[Byte]) extends Action
   case class LoadMoleculesFromJsFile(file: File) extends Action
   case class LoadMoleculesLocally(file: File) extends Action
 

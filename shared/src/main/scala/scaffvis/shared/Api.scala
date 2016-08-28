@@ -18,11 +18,11 @@ trait Api {
     */
   def getScaffold(scaffoldId: ScaffoldId): Seq[Scaffold]
 
-  /**
-    * Load (and preprocess) dataset
-    */
-
-  def loadFromSmiles(smiles: Seq[String]): Seq[Molecule]
-
-  def loadFromFile(fileContent: Array[Byte]): Seq[Molecule]
+//  /**
+//    * Load (and preprocess) dataset
+//    */
+//
+//  def loadFromSmiles(smiles: Seq[String]): Seq[Molecule]
+//
+//  def loadFromFile(fileContent: Array[Byte]): Seq[Molecule]
 }

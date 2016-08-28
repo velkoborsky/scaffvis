@@ -13,6 +13,7 @@ object GlyphIcon {
 
   lazy val cog = base("cog")
   lazy val check = base("check")
+  lazy val exclamationSign = base("exclamation-sign")
   lazy val openFile = base("open-file")
   lazy val refresh = base("refresh")
   lazy val remove = base("remove")

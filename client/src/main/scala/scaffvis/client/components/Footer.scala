@@ -3,7 +3,7 @@ package scaffvis.client.components
 import scaffvis.client.components.common.{GlyphIcon, ReusableCmps}
 import scaffvis.client.store.model.Model
 import scaffvis.shared.model.Scaffold
-import diode.data.{Pending, Ready}
+import diode.data.{Failed, Pending, Ready}
 import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.prefix_<^._
 
@@ -33,6 +33,12 @@ object Footer {
                 datasetSelectionSize.map(n => s" ($n selected)").getOrElse("")
             }
             case Pending(_) => Seq[ReactNode]("Loading dataset ", GlyphIcon.refresh)
+
+            case Failed(e) => Seq[ReactNode](
+              <.span(^.color := "red", GlyphIcon.exclamationSign),
+              " Loading dataset failed. You might be trying to use an unsupported file format."
+            )
+
             case _ => "No dataset loaded."
           }
         )
