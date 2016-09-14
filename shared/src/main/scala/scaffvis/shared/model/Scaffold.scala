@@ -17,8 +17,10 @@ case object RootScaffold extends Scaffold {
   override val id: ScaffoldId = 1
   override val level = 0
 
+  private var _subtreeSize: Option[Int] = None
   override def subtreeSize: Int =
-    throw new UnsupportedOperationException("Subtree size not available for the root element")
+    _subtreeSize.getOrElse(throw new UnsupportedOperationException("Subtree size not available for the root element"))
+  def setSubtreeSize(n: Int) = if (_subtreeSize.isEmpty) _subtreeSize = Some(n)
 
   override def key = "ROOT"
   override def shortName = "L0:ROOT"

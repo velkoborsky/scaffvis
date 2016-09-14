@@ -61,9 +61,8 @@ class ScaffoldHierarchyStore(val readOnly: Boolean = true) extends MapDbStore wi
       Option(scaffoldId)
   }
 
-  override def children(parentId: ScaffoldId): Seq[Scaffold] = {
-    val childrenIds = childrenMap.getOrDefault(parentId, Array.empty)
-    childrenIds.map(get)
+  def childrenIds(parentId: ScaffoldId): Seq[ScaffoldId] = {
+    childrenMap.getOrDefault(parentId, Array.empty)
   }
 
   override def parentId(childId: ScaffoldId): Option[ScaffoldId] = {
@@ -83,7 +82,8 @@ class ScaffoldHierarchyStore(val readOnly: Boolean = true) extends MapDbStore wi
   }
 
   private def rawScaffoldToScaffold(rawScaffold: RawScaffold, scaffoldId: ScaffoldId): Scaffold = rawScaffold match {
-    case RawScaffold(0, _, _) =>
+    case RawScaffold(0, _, subtreeSize) =>
+      RootScaffold.setSubtreeSize(subtreeSize)
       RootScaffold
     case RawScaffold(1, key, subtreeSize) =>
       RingCountScaffold(id = scaffoldId, level = 1, ringCount = key.toInt, subtreeSize = subtreeSize)

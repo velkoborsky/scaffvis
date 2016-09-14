@@ -13,12 +13,13 @@ trait ScaffoldHierarchy {
 
   def get(scaffoldId: ScaffoldId): Scaffold
   def getId(level: Int, key: String): Option[ScaffoldId]
-  def children(parentId: ScaffoldId): Seq[Scaffold]
+  def childrenIds(parentId: ScaffoldId): Seq[ScaffoldId]
   def parentId(childId: ScaffoldId): Option[ScaffoldId]
   def parentId_!(childId: ScaffoldId): ScaffoldId
 
   def root: Scaffold = RootScaffold
 
+  def children(parentId: ScaffoldId): Seq[Scaffold] = childrenIds(parentId).map(get)
   def children(parent: Scaffold): Seq[Scaffold] = children(parent.id)
   def parent(child: Scaffold): Option[Scaffold] = parentId(child.id).map(get)
 
