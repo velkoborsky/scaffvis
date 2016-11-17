@@ -41,6 +41,9 @@ object Footer {
 
             case _ => "No dataset loaded."
           }
+        ),
+        <.div(^.className := "footer-text", ^.float := "right",
+          <.a(^.href := "https://github.com/velkoborsky/scaffvis/issues", "Report a problem")
         )
       )
 
