@@ -36,7 +36,7 @@ object Footer {
 
             case Failed(e) => Seq[ReactNode](
               <.span(^.color := "red", GlyphIcon.exclamationSign),
-              " Loading dataset failed. You might be trying to use an unsupported file format."
+              s" Loading dataset failed. You might be trying to use an unsupported file format. Error: ${e.getMessage}"
             )
 
             case _ => "No dataset loaded."

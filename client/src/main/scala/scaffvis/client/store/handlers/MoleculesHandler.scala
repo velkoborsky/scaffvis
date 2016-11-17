@@ -3,6 +3,7 @@ package scaffvis.client.store.handlers
 import autowire._
 import diode.data.{Failed, Pending, Pot, Ready}
 import diode.{ActionHandler, ActionResult, Effect, ModelRW}
+import org.scalajs.dom.ext.AjaxException
 import scaffvis.client.services._
 import scaffvis.client.store.actions.MoleculesActions._
 import scaffvis.client.store.handlers.common.SvgHandlerHelper
@@ -70,7 +71,14 @@ class MoleculesHandler[M](model: ModelRW[M, Pot[Molecules]]) extends ActionHandl
       updated(
         newValue = Pending(),
         effect = Effect(UploadDataset(file).map(ReplaceMolecules)
-          .recover({ case e: Throwable => LoadMoleculesFailed(e)})
+          .recover({
+            case axe: AjaxException =>
+              val msg = axe.xhr.response.toString.take(200)
+              LoadMoleculesFailed(new RuntimeException(msg, axe))
+            case e: Throwable =>
+              val msg = e.toString
+              LoadMoleculesFailed(new RuntimeException(msg, e))
+          })
         )
       )
     case LoadMoleculesLocally(file) =>
