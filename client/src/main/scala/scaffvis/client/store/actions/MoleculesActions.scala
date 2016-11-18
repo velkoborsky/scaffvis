@@ -24,5 +24,6 @@ object MoleculesActions {
 //  case class LoadMoleculesFromFile(fileContent: Array[Byte]) extends Action
   case class LoadMoleculesFromJsFile(file: File) extends Action
   case class LoadMoleculesLocally(file: File) extends Action
+  case class LoadMoleculesFromSampleDataset(name: String) extends Action
 
 }

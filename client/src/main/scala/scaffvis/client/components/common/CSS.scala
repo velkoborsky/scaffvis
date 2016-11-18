@@ -34,6 +34,7 @@ object CSS extends StyleSheet.Inline {
   val centerBlock = className("center-block")
 
   val textCenter = className("text-center")
+  val textMuted = className("text-muted")
 
   val centeredBoxDefault = className("centered-box-default")
 

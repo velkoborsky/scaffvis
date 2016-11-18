@@ -1,0 +1,3 @@
+package components
+
+object InvalidDatasetNameException extends RuntimeException

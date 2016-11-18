@@ -71,14 +71,14 @@ class MoleculesHandler[M](model: ModelRW[M, Pot[Molecules]]) extends ActionHandl
       updated(
         newValue = Pending(),
         effect = Effect(UploadDataset(file).map(ReplaceMolecules)
-          .recover({
-            case axe: AjaxException =>
-              val msg = axe.xhr.response.toString.take(200)
-              LoadMoleculesFailed(new RuntimeException(msg, axe))
-            case e: Throwable =>
-              val msg = e.toString
-              LoadMoleculesFailed(new RuntimeException(msg, e))
-          })
+          .recover(recoverFromLoadDatasetFailure)
+        )
+      )
+    case LoadMoleculesFromSampleDataset(name) =>
+      updated(
+        newValue = Pending(),
+        effect = Effect(GetSampleDataset(name).map(ReplaceMolecules)
+          .recover(recoverFromLoadDatasetFailure)
         )
       )
     case LoadMoleculesLocally(file) =>
@@ -86,6 +86,15 @@ class MoleculesHandler[M](model: ModelRW[M, Pot[Molecules]]) extends ActionHandl
         newValue = Pending(),
         effect = Effect(FileIO.fileToByteArray(file).map(BooPickleSerializer.load))
       )
+  }
+
+  val recoverFromLoadDatasetFailure: PartialFunction[Throwable, LoadMoleculesFailed] = {
+    case axe: AjaxException =>
+      val msg = axe.xhr.response.toString.take(200)
+      LoadMoleculesFailed(new RuntimeException(msg, axe))
+    case e: Throwable =>
+      val msg = e.toString
+      LoadMoleculesFailed(new RuntimeException(msg, e))
   }
 
 }

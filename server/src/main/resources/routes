@@ -16,6 +16,7 @@ POST    /api/*path                        controllers.Application.autowireApi(pa
 
 # Load dataset
 POST    /upload/dataset                   controllers.Application.uploadDataset
+GET     /get/sampleDataset/*name          controllers.Application.sampleDataset(name)
 
 # Logging
 POST /logging                             controllers.Application.logging

@@ -3,6 +3,7 @@ package controllers
 import java.io.FileInputStream
 import javax.inject.Inject
 
+import components.SampleDatasetComponent
 import scaffvis.shared.Api
 import scaffvis.shared.model.Molecule
 import play.api.Environment
@@ -20,7 +21,11 @@ object Router extends autowire.Server[Js.Value, Reader, Writer]{
   def write[R: Writer](r: R) = upickle.default.writeJs(r)
 }
 
-class Application @Inject() (apiService: ApiService, implicit val environment: Environment) extends Controller {
+class Application @Inject() (
+                              apiService: ApiService,
+                              sampleDatasetComponent: SampleDatasetComponent,
+                              implicit val environment: Environment
+                            ) extends Controller {
 
   def index = Action {
     Ok(views.html.index("Scaffold Visualizer"))
@@ -64,6 +69,13 @@ class Application @Inject() (apiService: ApiService, implicit val environment: E
         case Success(molecules) => Ok(upickle.default.write(molecules, 2)).as(JSON)
         case Failure(e) => InternalServerError(e.toString)
       }
+  }
+
+  def sampleDataset(name: String) = Action {
+    sampleDatasetComponent.sampleDataset(name) match {
+      case Success(dataset) => Ok(dataset).as(JSON)
+      case Failure(e) => InternalServerError(e.toString)
+    }
   }
 
   def logging = Action(parse.anyContent) {
