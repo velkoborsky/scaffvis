@@ -3,7 +3,7 @@ import sbt.Project.projectToRef
 
 // common settings for all projects
 lazy val commonSettings = Seq(
-  version := "1.0.1",
+  version := "1.0.2",
   organization := "scaffvis",
   scalaVersion := Dependencies.versions.scala,
   scalacOptions ++= Seq(
