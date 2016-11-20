@@ -9,7 +9,8 @@ import japgolly.scalajs.react._
 import japgolly.scalajs.react.vdom.prefix_<^._
 
 import scala.collection.immutable.HashMap
-import scala.language.implicitConversions
+import scala.concurrent.duration._
+import scala.language.{implicitConversions, postfixOps}
 import scalacss.ScalaCssReact._
 
 object ScaffoldTreeMap {
@@ -77,7 +78,7 @@ object ScaffoldTreeMap {
             ^.onMouseOut --> hideTooltip,
             ^.onWheel ==> onWheelNavigation(scaffold.id),
             ^.onDblClick ==> onNonShiftDblClick(zoomIn(scaffold.id)),
-            ^.onClick ==> onShiftClick(toggleSelect(scaffold.id))
+            ^.onClick ==> onNonShiftClickDelay(toggleSelect(scaffold.id))
           )
         }
       }
@@ -110,16 +111,32 @@ object ScaffoldTreeMap {
         }
       }
 
-    def onShiftClick(cb: => ReactMouseEvent => Callback): ReactMouseEvent => Callback = {
+    /*
+    on single click delay the action (unless shift is pressed) and cancel it if dbl click is triggered
+     */
+
+    val clickToActionDelay = 500 milliseconds
+    var lastDblClickTime: Double = 0
+    def setDblClickTime(): Unit = lastDblClickTime = scala.scalajs.js.Date.now()
+    def lastDblClickBefore(interval: Duration) = scala.scalajs.js.Date.now() - lastDblClickTime > interval.toMillis
+
+    def onNonShiftClickDelay(cb: => ReactMouseEvent => Callback): ReactMouseEvent => Callback = {
       e: ReactMouseEvent =>
         if(e.getModifierState("Shift")) cb(e)
-        else Callback.empty
+        else Callback {
+          scala.scalajs.js.timers.setTimeout(clickToActionDelay) {
+            if (lastDblClickBefore(clickToActionDelay * 1.5))
+              cb(e).runNow()
+          }
+        }
     }
 
     def onNonShiftDblClick(cb: => Callback): ReactMouseEvent => Callback = {
-      e: ReactMouseEvent =>
+      e: ReactMouseEvent => {
+        setDblClickTime()
         if(! e.getModifierState("Shift")) cb
         else Callback.empty
+      }
     }
 
     def getLayout(scaffolds: Seq[Scaffold], scaffoldMoleculesCount: Option[Scaffold => Int],
