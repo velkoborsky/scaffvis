@@ -22,7 +22,8 @@ object ScaffoldTreeMap {
                     isAnyMoleculeSelected: Boolean,
                     tooltipControl: TooltipControl,
                     toggleSelect: ScaffoldId => ReactMouseEvent => Callback,
-                    onWheelNavigation: ScaffoldId => ReactWheelEvent => Callback,
+                    zoomOut: Callback,
+                    zoomIn: ScaffoldId => Callback,
                     onWheelDownZoomOut: ReactWheelEvent => Callback,
                     viewState: VSScaffoldTreemap
                   )
@@ -75,7 +76,8 @@ object ScaffoldTreeMap {
             ^.onMouseMove ==> moveTooltip,
             ^.onMouseOut --> hideTooltip,
             ^.onWheel ==> onWheelNavigation(scaffold.id),
-            ^.onClick ==> toggleSelect(scaffold.id)
+            ^.onDblClick ==> onNonShiftDblClick(zoomIn(scaffold.id)),
+            ^.onClick ==> onShiftClick(toggleSelect(scaffold.id))
           )
         }
       }
@@ -95,6 +97,29 @@ object ScaffoldTreeMap {
         images.toReactNodeArray,
         foregroundRects.toReactNodeArray
       )
+    }
+
+    val onWheelNavigation: ScaffoldId => ReactWheelEvent => Callback =
+      scaffoldId => e => {
+        e.preventDefault()
+        $.props >>= { (props: Props) =>
+          if (e.deltaY < 0) //scroll up ~ zoom
+            props.zoomIn(scaffoldId)
+          else
+            props.zoomOut
+        }
+      }
+
+    def onShiftClick(cb: => ReactMouseEvent => Callback): ReactMouseEvent => Callback = {
+      e: ReactMouseEvent =>
+        if(e.getModifierState("Shift")) cb(e)
+        else Callback.empty
+    }
+
+    def onNonShiftDblClick(cb: => Callback): ReactMouseEvent => Callback = {
+      e: ReactMouseEvent =>
+        if(! e.getModifierState("Shift")) cb
+        else Callback.empty
     }
 
     def getLayout(scaffolds: Seq[Scaffold], scaffoldMoleculesCount: Option[Scaffold => Int],

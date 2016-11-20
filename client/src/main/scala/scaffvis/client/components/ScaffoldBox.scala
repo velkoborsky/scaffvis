@@ -72,7 +72,8 @@ object ScaffoldBox {
         isAnyMoleculeSelected = isAnyMoleculeSelected,
         tooltipControl = tooltipControl,
         toggleSelect = toggleSelect,
-        onWheelNavigation = onWheelNavigation,
+        zoomOut = zoomOut,
+        zoomIn = zoomIn,
         onWheelDownZoomOut = props.onWheelDownZoomOut,
         viewState = viewState.scaffoldTreeMap
       ))
@@ -108,17 +109,6 @@ object ScaffoldBox {
             if (isAnyDescendantSelected) DeselectMolecules(descendants)
             else SelectMolecules(descendants)
           Store.dispatchCB(action)
-        }
-      }
-
-    val onWheelNavigation: ScaffoldId => ReactWheelEvent => Callback =
-      scaffoldId => e => {
-        e.preventDefault()
-        $.props >>= { (props: Props) =>
-          if (e.deltaY < 0) //scroll up ~ zoom
-            props.zoomIn(scaffoldId)
-          else
-            props.zoomOut
         }
       }
   }
