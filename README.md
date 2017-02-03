@@ -22,4 +22,4 @@ GNU General Public License version 3
 
 # Citation
 
-Velkoborsky, J., & Hoksza, D. (2016). Scaffold analysis of PubChem database as background for hierarchical scaffold-based visualization. Journal of Cheminformatics, 8(74) [DOI](https://doi.org/10.1186/s13321-016-0186-7)
+Velkoborsky, J., & Hoksza, D. (2016). Scaffold analysis of PubChem database as background for hierarchical scaffold-based visualization. Journal of Cheminformatics, 8(74) [DOI: https://doi.org/10.1186/s13321-016-0186-7](https://doi.org/10.1186/s13321-016-0186-7)
